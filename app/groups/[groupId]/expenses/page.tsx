@@ -12,7 +12,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 async function getGroupExpenses(groupId: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   // Fetch all expenses from the correct API, then filter by groupId
   const res = await fetch(`${baseUrl}/api/expences`);
   if (!res.ok) return [];

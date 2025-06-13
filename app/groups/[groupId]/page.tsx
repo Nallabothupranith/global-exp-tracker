@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/table";
 
 async function getGroupExpenses(groupId: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const res = await fetch(`${baseUrl}/api/expences`);
   if (!res.ok) return [];
   const data = await res.json();
@@ -27,7 +27,7 @@ async function getGroupExpenses(groupId: string) {
 }
 
 async function getGroupMembers(groupId: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const res = await fetch(`${baseUrl}/api/group-members?group_id=${groupId}`);
   if (!res.ok) return [];
   const data = await res.json();
