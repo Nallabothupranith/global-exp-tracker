@@ -12,7 +12,9 @@ import Link from "next/link";
 import DeleteGroupButton from "@/components/DeleteGroupButton";
 
 async function getGroups() {
-  const res = await fetch("http://localhost:3000/api/groups", {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+  const res = await fetch(`${baseUrl}/api/groups`, {
     cache: "no-store",
   });
   if (!res.ok) {
