@@ -12,7 +12,11 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 async function getGroupExpenses(groupId: string) {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const baseUrl =
+    process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : undefined;
+  if (!baseUrl) return [];
   // Fetch all expenses from the correct API, then filter by groupId
   const res = await fetch(`${baseUrl}/api/expences`);
   if (!res.ok) return [];
