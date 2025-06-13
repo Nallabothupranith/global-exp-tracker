@@ -25,12 +25,12 @@ async function getGroupExpenses(groupId: string) {
     : [];
 }
 
-interface PageProps {
-  params: { groupId: string };
-}
-
-export default async function GroupExpensesPage({ params }: PageProps) {
-  const groupId = params.groupId;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ groupId: string }>;
+}) {
+  const { groupId } = await params;
   if (!groupId) return notFound();
   const expenses = await getGroupExpenses(groupId);
 

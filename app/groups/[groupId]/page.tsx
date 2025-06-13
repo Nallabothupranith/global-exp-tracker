@@ -34,12 +34,12 @@ async function getGroupMembers(groupId: string) {
   return Array.isArray(data) ? data : [];
 }
 
-interface PageProps {
-  params: { groupId: string };
-}
-
-const Page = async ({ params }: PageProps) => {
-  const groupId = params.groupId;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ groupId: string }>;
+}) {
+  const { groupId } = await params;
   if (!groupId) return notFound();
   const expenses = await getGroupExpenses(groupId);
   const members = await getGroupMembers(groupId);
@@ -139,6 +139,4 @@ const Page = async ({ params }: PageProps) => {
       </Table>
     </div>
   );
-};
-
-export default Page;
+}
