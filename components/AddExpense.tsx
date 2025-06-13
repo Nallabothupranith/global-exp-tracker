@@ -26,9 +26,11 @@ type ExpenseForm = z.infer<typeof expenseSchema>;
 export default function AddExpense({
   onExpenseAdded,
   groupId,
+  members,
 }: {
   onExpenseAdded?: () => void;
   groupId?: string;
+  members: any;
 }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -152,11 +154,17 @@ export default function AddExpense({
           </div>
           <div>
             <label className="block mb-1">Spent By (User ID)</label>
-            <input
+            <select
               className="w-full border rounded px-2 py-1 dark:bg-neutral-900"
               {...register("spent_by")}
               disabled={loading}
-            />
+            >
+              {members.map((m: any) => (
+                <option key={m.id} value={m.id}>
+                  {m.name}
+                </option>
+              ))}
+            </select>
             {errors.spent_by && (
               <div className="text-red-500 text-sm">
                 {errors.spent_by.message}
@@ -185,7 +193,7 @@ export default function AddExpense({
             <label className="block mb-1">
               Spent To (comma separated user IDs)
             </label>
-            <input
+            <select
               className="w-full border rounded px-2 py-1 dark:bg-neutral-900"
               {...register("spent_to", {
                 setValueAs: (v: unknown) => {
@@ -201,9 +209,15 @@ export default function AddExpense({
                   return [];
                 },
               })}
-              placeholder="e.g. 2,3,4"
               disabled={loading}
-            />
+              multiple
+            >
+              {members.map((m: any) => (
+                <option key={m.id} value={m.id}>
+                  {m.name}
+                </option>
+              ))}
+            </select>
             {errors.spent_to && (
               <div className="text-red-500 text-sm">
                 {errors.spent_to.message}

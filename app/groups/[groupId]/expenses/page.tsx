@@ -42,7 +42,7 @@ export default async function Page({
         >
           ← Back to Group
         </Link>
-        <AddExpense groupId={groupId} />
+        <AddExpense groupId={groupId} members={[]} />
       </div>
       <h1 className="text-xl font-bold mb-4">Expenses for Group {groupId}</h1>
       <Table>

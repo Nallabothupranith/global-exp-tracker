@@ -53,7 +53,7 @@ export default async function Page({
         >
           ← Back to Groups
         </Link>
-        <AddExpense groupId={groupId} />
+        <AddExpense groupId={groupId} members={members} />
         <SettleUp
           members={members.map((m: any) => ({ id: m.id, name: m.name }))}
           expenses={expenses.map((e: any) => ({
